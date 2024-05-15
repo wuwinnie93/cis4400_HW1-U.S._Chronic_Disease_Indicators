@@ -1,0 +1,22 @@
+{{ config(
+    materialized='table'
+) }}
+
+WITH chronic_disease_data_cte AS (
+    SELECT
+        DataID,
+        DiseaseID,
+        IndicatorID,
+        GeographyID,
+        TimePeriodID,
+        Value,
+        Unit,
+        ConfidenceLimit,
+        DataValueType,
+        AgeGroup,
+        Gender,
+        Race
+    FROM {{ ref('chronic_disease_raw') }}
+)
+
+SELECT * FROM chronic_disease_data_cte

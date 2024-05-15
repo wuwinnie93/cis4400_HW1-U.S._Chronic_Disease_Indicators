@@ -1,0 +1,12 @@
+{{ config(
+    materialized='table'
+) }}
+
+WITH disease_cte AS (
+    SELECT DISTINCT
+        DiseaseID,
+        DiseaseName
+    FROM {{ ref('chronic_disease_raw') }}
+)
+
+SELECT * FROM disease_cte

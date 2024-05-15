@@ -1,0 +1,15 @@
+{{ config(
+    materialized='table'
+) }}
+
+WITH time_period_cte AS (
+    SELECT DISTINCT
+        TimePeriodID,
+        Year,
+        Quarter,
+        Month,
+        Day
+    FROM {{ ref('chronic_disease_raw') }}
+)
+
+SELECT * FROM time_period_cte

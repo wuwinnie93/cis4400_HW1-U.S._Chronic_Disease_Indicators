@@ -1,0 +1,14 @@
+{{ config(
+    materialized='table'
+) }}
+
+WITH indicator_cte AS (
+    SELECT DISTINCT
+        IndicatorID,
+        IndicatorName,
+        Category,
+        DataSource
+    FROM {{ ref('chronic_disease_raw') }}
+)
+
+SELECT * FROM indicator_cte
